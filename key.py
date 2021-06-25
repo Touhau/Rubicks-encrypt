@@ -1,45 +1,40 @@
 import constant
 import random
 
-# Генерация ключа заданной длины с проверкой. 
-# # Проверка включает в себя: 
-# 1) Проверка на отсутствие рядом стоящих взаимообратных действий
-# 2) Проверка на количество уникальных действий (минимум ...)
-# 3) Проверка на циклические действия
+
 
 class RandomKey:
     def __init__(self, keyLenght):
         self.keyLen = keyLenght
-        self.keyWord = tuple('relkfgbntudsxpyozi')
-        self.generateKey(self.keyLen)
-        
-    
-    def generateKey(self, keyLen):
+        self.keyWord = tuple('relkfgbntudsxpyozi')  
+    def generateKey(self, shift = False):
         self.randomKey = ''
-        for i in range(keyLen):
-            self.randomKey+=random.choice(self.keyWord)
-        
-        return self.keyCheck(keyLen)
-
-    def keyCheck(self, kL):
+        for i in range(self.keyLen):
+            self.randomKey+=random.choice(self.keyWord)  
+        return self.keyCheck(self.keyLen, shift)
+    def keyCheck(self, kL, shift = False):
         counter = 0
         repeatCounter = 0
         for i in range(len(self.randomKey)-1):
             if constant.ConstReverseThreeXThree[self.randomKey[i]] == self.randomKey[i+1]:
                 counter+=1
-            if self.randomKey[i] == self.randomKey[i+1]:
-                repeatCounter += 1
-        
-        
-        if counter >= 1 and repeatCounter >= 1:
-            print(f'Ключ: {self.randomKey}, ошибок: {counter}, повторений: {repeatCounter}')
-            self.generateKey(kL)
+        for i in range(len(self.randomKey)-2):
+            if self.randomKey[i] == self.randomKey[i+1] == self.randomKey[i+2]:
+                repeatCounter+=1
+        if counter >= 1 or repeatCounter >= 1:
+            return self.generateKey()
         else:
-            print(self.randomKey)
-        
+            return self.randomKey
 
-a = RandomKey(20)
+# m = []
+# a = RandomKey(20)
+# for i in range(20):
+#     m.append(a.generateKey())
+# print(len(m))
+
+# a = RandomKey(20)
+# m = a.generateKey(True)
+# print(len(m), m)
 
 
-
-        
+  

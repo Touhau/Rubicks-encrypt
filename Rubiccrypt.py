@@ -6,7 +6,6 @@
 import constant 
 
 class ThreeXThree:
-    
     @staticmethod
     def crypt(key, openText):
         for i in key:
@@ -16,12 +15,10 @@ class ThreeXThree:
             openText = roundText
         cryptoText = openText
         return cryptoText
-
     @staticmethod
     def decrypt(key, cryptoText):
         reverseKey = ThreeXThree.getReverseKey(key)
         return ThreeXThree.crypt(reverseKey, cryptoText)
-
     @staticmethod
     def getReverseKey(key):
         backKey = ''
@@ -30,3 +27,9 @@ class ThreeXThree:
         for i in reversed(backKey): revKey+= i
         return revKey
  
+# ley = 'srtlxbtdykgetbedzntr'
+
+# # a = ThreeXThree.crypt(ley, 'У1лукоморья1дуб1зелёный1Зл')
+# b = ThreeXThree.decrypt(ley, 'к1мЗУьёоб1рлдул1зеулйын1оя')
+
+
